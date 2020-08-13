@@ -11,7 +11,7 @@ var secondsLeft = 0;
 //Displays current time left in quiz
 timeEl.textContent = "Time: " + secondsLeft;
 
-// on load display header and prompt messages ---source--- https://www.w3schools.com/jsref/event_onload.asp
+// on load displays header and prompt messages ---source--- https://www.w3schools.com/jsref/event_onload.asp
 document.getElementById('headerElem').addEventListener('load', displayGreeting());
 
 function displayGreeting() {
