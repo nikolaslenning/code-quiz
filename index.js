@@ -15,22 +15,22 @@ timeEl.textContent = "Time: " + secondsLeft;
 document.getElementById('headerElem').addEventListener('load', displayGreeting());
 
 function displayGreeting() {
-    document.getElementById('headerElem').innerHTML = "Coding Quiz Challenge";
-    document.getElementById('promptElem').innerHTML = 'Try to anser the following code related questions within the time limit. Every incorrect answer penalizes your scoretime by 10 seconds.'    
+    document.getElementById('headerElem').innerText = "Coding Quiz Challenge";
+    document.getElementById('promptElem').innerText = 'Try to anser the following code related questions within the time limit. Every incorrect answer penalizes your scoretime by 10 seconds.'    
 }
 
 // Event listener that runs callback function setTime to start timer
 startButton.addEventListener('click', function setTime() {
+    startButton.setAttribute('disabled', true);
+    startButton.style.display = 'none';
     var secondsLeft = 76
     var timerInterval = setInterval(function() {
     secondsLeft--;
     timeEl.textContent ="Time: " +  secondsLeft;
-    startButton.setAttribute('disabled', true);
-    // ^^^^^ solution to preventing double click running fuction setTime twice ----> https://stackoverflow.com/questions/20281546/how-to-prevent-calling-of-en-event-handler-twice-on-fast-clicks    
+    // ^^^^^ solution to disable start button, preventing double click running fuction setTime mulitple times ----> https://stackoverflow.com/questions/20281546/how-to-prevent-calling-of-en-event-handler-twice-on-fast-clicks    
    
     if(secondsLeft === 0) {
       clearInterval(timerInterval);
-      sendMessage();
     }
   }, 1000);  
 
@@ -50,10 +50,20 @@ startButton.addEventListener('click', function clearMessage() {
     } else {
         promptElem.style.display = 'none';
     }
+    appendQuestion('What is the meaning of life?')
 });
 
-function sendMessage() {
-console.log('Time is up!');
+//function that appends question to h3
+function appendQuestion (question) {
+    var elem = document.querySelector('h3');
+    var quizQuestion = question 
+    elem.innerText = quizQuestion
+    container.append(elem);
 }
 
-// setTime();
+// appendQuestion('What is the meaning of life?')
+
+
+
+
+
