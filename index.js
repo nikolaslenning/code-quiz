@@ -1,5 +1,5 @@
 //convert html ID to JS variable
-var startButton = document.getElementById('startButton');
+const startButton = document.getElementById('startButton');
 var timeEl = document.getElementById("time");
 var headerElem = document.getElementById('headerElem')
 var finalScore = document.getElementById('finalScore')
@@ -27,16 +27,33 @@ startButton.addEventListener('click', function setTime() {
     timeEl.textContent ="Time: " +  secondsLeft;
     startButton.setAttribute('disabled', true);
     // ^^^^^ solution to preventing double click running fuction setTime twice ----> https://stackoverflow.com/questions/20281546/how-to-prevent-calling-of-en-event-handler-twice-on-fast-clicks    
+   
     if(secondsLeft === 0) {
       clearInterval(timerInterval);
       sendMessage();
     }
-  }, 1000);
+  }, 1000);  
+
   
+});
+// event listener that hides headerElem & promptElem when start button is clicked -- src= https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp
+startButton.addEventListener('click', function clearMessage() { 
+    var headerElem = document.getElementById('headerElem');    
+    if (headerElem.style.display === 'none') {
+        headerElem.style.display = 'block';
+    } else {
+        headerElem.style.display = 'none';
+    }
+    var promptElem = document.getElementById('promptElem');    
+    if (promptElem.style.display === 'none') {
+        promptElem.style.display = 'block';
+    } else {
+        promptElem.style.display = 'none';
+    }
 });
 
 function sendMessage() {
-  console.log('Time is up!');
+console.log('Time is up!');
 }
 
 // setTime();
