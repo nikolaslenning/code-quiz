@@ -5,7 +5,7 @@ var headerElem = document.getElementById('header-elem')
 var finalScore = document.getElementById('final-score')
 var questionElem = document.getElementById('questionElem')
 var secondsLeft = 0;
-// var counter = 0;
+var counter = 0;
 //Displays current time left in quiz
 timeEl.textContent = "Time: " + secondsLeft;
 
@@ -50,9 +50,9 @@ startButton.addEventListener('click', function clearMessage() {
     }
     // appendQuestion('What is the meaning of life?')
 });
+// var counter = 0;
 
 startButton.addEventListener('click', function displayQA() {
-    var counter = 0;
 
     var questionArray = [
         {
@@ -110,14 +110,16 @@ startButton.addEventListener('click', function displayQA() {
                 }
             ]
         }];
+
     var questionElem = document.getElementById('question-elem')
     var answerElem = document.getElementById('answer-buttons')
-
     var currentQuestion = questionArray[counter]
     var answersArray = currentQuestion.answers
     var questionText = currentQuestion.question
-    // var correctAns = 
     var newQuestion = document.createElement('h3')
+
+    var resetQuestion = document.getElementById('question-elem')
+    resetQuestion.value=resetQuestion.defaultValue;
     newQuestion.innerText = questionText;
     questionElem.appendChild(newQuestion)
     for (var j = 0; j < answersArray.length; j++) {
@@ -125,18 +127,22 @@ startButton.addEventListener('click', function displayQA() {
         var currentAnswer = answersArray[j]
         answerButton.innerText = currentAnswer.text
         answerButton.setAttribute('is-correct', currentAnswer.correct)
+        // debugger
         answerButton.addEventListener('click', function () {
            
            counter++;
-           return counter;
+           displayQA();
+           console.log(counter);
+        //    return counter;
             
             // if (questionArray.correct == true) {
             // }
             //what to do when clicked
         });
+        //creating more children, go to top of function and do innerhtml for each element
         answerElem.appendChild(answerButton)
+        
     }
-
 
 });
 
