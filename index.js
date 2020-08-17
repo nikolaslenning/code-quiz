@@ -6,6 +6,7 @@ var finalScore = document.getElementById('final-score')
 var questionElem = document.getElementById('questionElem')
 var secondsLeft = 0;
 var counter = 0;
+var k =0
 //Displays current time left in quiz
 timeEl.textContent = "Time: " + secondsLeft;
 
@@ -29,6 +30,7 @@ startButton.addEventListener('click', function setTime() {
 
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
+            alert('Time is up!')
         }
     }, 1000);
 
@@ -48,12 +50,12 @@ startButton.addEventListener('click', function clearMessage() {
     } else {
         promptElem.style.display = 'none';
     }
-    // appendQuestion('What is the meaning of life?')
+   
 });
-// var counter = 0;
+
 
 startButton.addEventListener('click', function displayQA() {
-
+    
     var questionArray = [
         {
             question: 'Why is the sky blue?',
@@ -110,38 +112,47 @@ startButton.addEventListener('click', function displayQA() {
                 }
             ]
         }];
-
+    
     var questionElem = document.getElementById('question-elem')
     var answerElem = document.getElementById('answer-buttons')
     var currentQuestion = questionArray[counter]
     var answersArray = currentQuestion.answers
     var questionText = currentQuestion.question
     var newQuestion = document.createElement('h3')
-
-    var resetQuestion = document.getElementById('question-elem')
-    resetQuestion.value=resetQuestion.defaultValue;
+    // var resetQuestion = document.getElementById('question-elem')
+    questionElem.innerHTML = ''
+    answerElem.innerHTML = ''
+    
     newQuestion.innerText = questionText;
-    questionElem.appendChild(newQuestion)
+    questionElem.append(newQuestion)
+    
     for (var j = 0; j < answersArray.length; j++) {
+        
         var answerButton = document.createElement('button')
         var currentAnswer = answersArray[j]
         answerButton.innerText = currentAnswer.text
         answerButton.setAttribute('is-correct', currentAnswer.correct)
-        // debugger
         answerButton.addEventListener('click', function () {
-           
+            
            counter++;
            displayQA();
-           console.log(counter);
-        //    return counter;
-            
-            // if (questionArray.correct == true) {
+           console.log(this.correct)
+        //    console.log(questionArray[k].answers[0])
+            k++;
+
+            if(questionArray[k].answers=='true'){
+            //     document.createElement('div')
+            //     console.log('click')
+            } else {
+            //     secondsLeft-10;
             // }
+            // if (questionArray.correct == true) {
+            }
             //what to do when clicked
         });
         //creating more children, go to top of function and do innerhtml for each element
-        answerElem.appendChild(answerButton)
         
+        answerElem.append(answerButton)
     }
 
 });
