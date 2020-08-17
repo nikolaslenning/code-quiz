@@ -136,13 +136,13 @@ startButton.addEventListener('click', function displayQA() {
             
            counter++;
            displayQA();
-           console.log(this.correct)
+           console.log(currentAnswer.correct)
         //    console.log(questionArray[k].answers[0])
             k++;
 
-            if(questionArray[k].answers=='true'){
+            if(currentAnswer =currentAnswer.correct){
             //     document.createElement('div')
-            //     console.log('click')
+                console.log('click')
             } else {
             //     secondsLeft-10;
             // }
