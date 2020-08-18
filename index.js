@@ -5,10 +5,10 @@ var headerElem = document.getElementById('header-elem')
 var finalScore = document.getElementById('final-score')
 var questionElem = document.getElementById('questionElem')
 var rightWrongBox= document.getElementById('right-wrong-box')
-var secondsLeft ='';
+var secondsLeft =75;
 var counter = 0;
 var k =0
-var penalty=10
+
 //Displays current time left in quiz
 timeEl.textContent = "Time: " + secondsLeft;
 
@@ -25,7 +25,7 @@ startButton.addEventListener('click', function setTime() {
     startButton.setAttribute('disabled', true);
     // ^^^^^ solution to disable start button, preventing double click running fuction setTime mulitple times ----> https://stackoverflow.com/questions/20281546/how-to-prevent-calling-of-en-event-handler-twice-on-fast-clicks    
     startButton.style.display = 'none';
-    var secondsLeft = 76
+    // var secondsLeft = 76
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = "Time: " + secondsLeft;
@@ -159,7 +159,7 @@ startButton.addEventListener('click', function displayQA() {
                   rightWrongBox.textContent="Correct!"
               } else {
                   rightWrongBox.textContent='Wrong!';
-                  timeEl.innerHTML = secondsLeft-penalty;
+                  secondsLeft-=10;
                                 
               }
             }
