@@ -4,9 +4,11 @@ var timeEl = document.getElementById("time-id");
 var headerElem = document.getElementById('header-elem')
 var finalScore = document.getElementById('final-score')
 var questionElem = document.getElementById('questionElem')
-var secondsLeft = 0;
+var rightWrongBox= document.getElementById('right-wrong-box')
+var secondsLeft ='';
 var counter = 0;
 var k =0
+var penalty=10
 //Displays current time left in quiz
 timeEl.textContent = "Time: " + secondsLeft;
 
@@ -31,6 +33,7 @@ startButton.addEventListener('click', function setTime() {
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
             alert('Time is up!')
+            window.stop();
         }
     }, 1000);
 
@@ -119,25 +122,15 @@ startButton.addEventListener('click', function displayQA() {
     var currentQuestion = questionArray[counter]
     var answersArray = currentQuestion.answers
     var questionText = currentQuestion.question
-    var correctAnswer = currentQuestion.correct
-    var clickedButton = ''
-    var userAnswer = questionArray[j]
-    // console.log();
-    var newQuestion = document.createElement('h3')
-    // var resetQuestion = document.getElementById('question-elem')
+    var correctAnswer = currentQuestion.correct    
+    var userAnswer = questionArray[j]    
+    var newQuestion = document.createElement('h3')    
     questionElem.innerHTML = ''
     answerElem.innerHTML = ''
     
     newQuestion.innerText = questionText;
     questionElem.append(newQuestion)
-    // var penalty=10;
-    // var choice =
-    // function compareAnswers (event) {
-    //     var choice=event.currentTarget;
-    //     if(choice.matches(true)) {
-    //         console.log('true');
-    //     }
-    // }
+   
     
     for (var j = 0; j < answersArray.length; j++) {
         
@@ -146,34 +139,16 @@ startButton.addEventListener('click', function displayQA() {
         answerButton.innerText = currentAnswer.text
         // answerButton.setAttribute('is-correct', currentAnswer.correct)
         // console.log(currentAnswer.correct)
-        answerButton.addEventListener('click', function () {
-            console.log(answerButton.innerText) // if (is-correct === true) 
-           counter++;
-        //    if(answerButton==)
+        answerButton.addEventListener('click', function () {            
+           counter++;        
            displayQA();
-        //    console.log(currentAnswer.correct)
-        //    console.log(questionArray[k].answers[0])
-            k++;
-
-            // if(choice ==currentAnswer.correct){
-            // //     document.createElement('div')
-            //     console.log('click')
-            // } else {
-            //     secondsLeft-10;
-            // }
-            // if (questionArray.correct == true) {
-            // }
-            //what to do when clicked
+           k++;           
         });
-        //creating more children, go to top of function and do innerhtml for each element
         
         answerElem.append(answerButton)
-
-        
     }
     //https://stackoverflow.com/questions/54471618/how-to-get-the-inner-text-of-dynamically-generated-buttons-in-javascript
-function get_text() 
-        {
+    function getTextCompare() {
           var buttons = document.getElementsByTagName('button');
           for (var i = 0; i < buttons.length; i++) {
             buttons[i].onclick = function () {
@@ -181,13 +156,17 @@ function get_text()
               console.log(answerText);
               console.log(answerButton.innerText);
               if (answerText===answerButton.innerText){
-                  console.log('cucksess')
+                  rightWrongBox.textContent="Correct!"
+              } else {
+                  rightWrongBox.textContent='Wrong!';
+                  timeEl.innerHTML = secondsLeft-penalty;
+                                
               }
             }
           }
-        } // ends get_text function
+        } 
         document.getElementById('answer-buttons').appendChild(answerButton);
-        get_text();
+        getTextCompare();
 });
 
 
