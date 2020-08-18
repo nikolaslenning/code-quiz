@@ -11,10 +11,10 @@ var k =0
 timeEl.textContent = "Time: " + secondsLeft;
 
 // on load displays header and prompt messages ---source--- https://www.w3schools.com/jsref/event_onload.asp
-document.getElementById('header-elem').addEventListener('load', displayGreeting());
+headerElem.addEventListener('load', displayGreeting());
 
 function displayGreeting() {
-    document.getElementById('header-elem').innerText = "Coding Quiz Challenge";
+    headerElem.innerText = "Coding Quiz Challenge";
     document.getElementById('prompt-elem').innerText = 'Try to anwser the following code related questions within the time limit. Every incorrect answer penalizes your scoretime by 10 seconds.'
 }
 
@@ -59,23 +59,24 @@ startButton.addEventListener('click', function displayQA() {
     var questionArray = [
         {
             question: 'Why is the sky blue?',
+            correct: 'Because ozone releases blue light when heated',
             answers: [
                 {
                     text: 'Because we live in the eye of a blue eyed giant',
-                    correct: false
+                    
                 },
                 {
                     text: 'Because it reflects the ocean',
-                    correct: false
+                    
                 },
                 {
                     text: 'Because ozone releases blue light when heated',
-                    correct: true
+                    
                 }
             ]
         },
         {
-            question: `Who's the Greatest?`,
+            question: "Who's the Greatest?",
             answers: [
                 {
                     text: 'muhammad Ali',
@@ -118,6 +119,10 @@ startButton.addEventListener('click', function displayQA() {
     var currentQuestion = questionArray[counter]
     var answersArray = currentQuestion.answers
     var questionText = currentQuestion.question
+    var correctAnswer = currentQuestion.correct
+    var clickedButton = ''
+    var userAnswer = questionArray[j]
+    // console.log();
     var newQuestion = document.createElement('h3')
     // var resetQuestion = document.getElementById('question-elem')
     questionElem.innerHTML = ''
@@ -125,36 +130,64 @@ startButton.addEventListener('click', function displayQA() {
     
     newQuestion.innerText = questionText;
     questionElem.append(newQuestion)
+    // var penalty=10;
+    // var choice =
+    // function compareAnswers (event) {
+    //     var choice=event.currentTarget;
+    //     if(choice.matches(true)) {
+    //         console.log('true');
+    //     }
+    // }
     
     for (var j = 0; j < answersArray.length; j++) {
         
         var answerButton = document.createElement('button')
         var currentAnswer = answersArray[j]
         answerButton.innerText = currentAnswer.text
-        answerButton.setAttribute('is-correct', currentAnswer.correct)
+        // answerButton.setAttribute('is-correct', currentAnswer.correct)
+        // console.log(currentAnswer.correct)
         answerButton.addEventListener('click', function () {
-            
+            console.log(answerButton.innerText) // if (is-correct === true) 
            counter++;
+        //    if(answerButton==)
            displayQA();
-           console.log(currentAnswer.correct)
+        //    console.log(currentAnswer.correct)
         //    console.log(questionArray[k].answers[0])
             k++;
 
-            if(currentAnswer =currentAnswer.correct){
-            //     document.createElement('div')
-                console.log('click')
-            } else {
+            // if(choice ==currentAnswer.correct){
+            // //     document.createElement('div')
+            //     console.log('click')
+            // } else {
             //     secondsLeft-10;
             // }
             // if (questionArray.correct == true) {
-            }
+            // }
             //what to do when clicked
         });
         //creating more children, go to top of function and do innerhtml for each element
         
         answerElem.append(answerButton)
-    }
 
+        
+    }
+    //https://stackoverflow.com/questions/54471618/how-to-get-the-inner-text-of-dynamically-generated-buttons-in-javascript
+function get_text() 
+        {
+          var buttons = document.getElementsByTagName('button');
+          for (var i = 0; i < buttons.length; i++) {
+            buttons[i].onclick = function () {
+              var answerText=this.innerText;
+              console.log(answerText);
+              console.log(answerButton.innerText);
+              if (answerText===answerButton.innerText){
+                  console.log('cucksess')
+              }
+            }
+          }
+        } // ends get_text function
+        document.getElementById('answer-buttons').appendChild(answerButton);
+        get_text();
 });
 
 
