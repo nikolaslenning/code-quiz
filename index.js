@@ -7,7 +7,6 @@ var questionElem = document.getElementById('questionElem')
 var rightWrongBox= document.getElementById('right-wrong-box')
 var secondsLeft =75;
 var counter = 0;
-var k =0
 
 //Displays current time left in quiz
 timeEl.textContent = "Time: " + secondsLeft;
@@ -25,19 +24,16 @@ startButton.addEventListener('click', function setTime() {
     startButton.setAttribute('disabled', true);
     // ^^^^^ solution to disable start button, preventing double click running fuction setTime mulitple times ----> https://stackoverflow.com/questions/20281546/how-to-prevent-calling-of-en-event-handler-twice-on-fast-clicks    
     startButton.style.display = 'none';
-    // var secondsLeft = 76
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = "Time: " + secondsLeft;
 
-        if (secondsLeft === 0) {
+        if (secondsLeft < 0) {
             clearInterval(timerInterval);
             alert('Time is up!')
             window.stop();
         }
     }, 1000);
-
-
 });
 // event listener that hides headerElem & promptElem when start button is clicked -- src= https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp
 startButton.addEventListener('click', function clearMessage() {
@@ -52,10 +48,8 @@ startButton.addEventListener('click', function clearMessage() {
         promptElem.style.display = 'block';
     } else {
         promptElem.style.display = 'none';
-    }
-   
+    }   
 });
-
 
 startButton.addEventListener('click', function displayQA() {
     
@@ -126,11 +120,9 @@ startButton.addEventListener('click', function displayQA() {
     var userAnswer = questionArray[j]    
     var newQuestion = document.createElement('h3')    
     questionElem.innerHTML = ''
-    answerElem.innerHTML = ''
-    
+    answerElem.innerHTML = ''    
     newQuestion.innerText = questionText;
-    questionElem.append(newQuestion)
-   
+    questionElem.append(newQuestion)   
     
     for (var j = 0; j < answersArray.length; j++) {
         
@@ -141,8 +133,7 @@ startButton.addEventListener('click', function displayQA() {
         // console.log(currentAnswer.correct)
         answerButton.addEventListener('click', function () {            
            counter++;        
-           displayQA();
-           k++;           
+           displayQA();               
         });
         
         answerElem.append(answerButton)
@@ -159,14 +150,17 @@ startButton.addEventListener('click', function displayQA() {
                   rightWrongBox.textContent="Correct!"
               } else {
                   rightWrongBox.textContent='Wrong!';
-                  secondsLeft-=10;
-                                
+                  secondsLeft-=10;                                
               }
             }
           }
         } 
         document.getElementById('answer-buttons').appendChild(answerButton);
         getTextCompare();
+        console.log(timeEl)
+    function showHighScore(){
+        let scoreList= document.getElementById('score-list');
+    }
 });
 
 
